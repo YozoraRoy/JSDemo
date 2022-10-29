@@ -2,59 +2,176 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>你好，Guest</title>
+    <title>Hellow，Guest</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/79b0e2b1d5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Team Spilte</h1>
-    <div class="container text-center">
-        <div class="row">
-            <!--<div class="col">
-        Column
-    </div>
-    <div class="col">
-        Column
-    </div>-->
-            <div class="col">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">How many teams </label>
-                    <input type="number" min="1" max="4" class="form-control" id="input_team" placeholder="Enter your number max 4">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                    <!--<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
-                    <span>
+    <!--<nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fa-solid fa-basketball" href="#">Team Spilt</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            </button>
+            <span class="navbar-toggler-icon"></span>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://omoroi-life.com/jp/sports/basketball#new-properties">Link</a>
+                </li>
 
-                    </span>
-                </div>
-            </div>
-            <div class="col-12">
-                <button id="saveBtn" name="saveBtn" type="submit" class="btn btn-primary">Calculator</button>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>-->
+
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fa-solid fa-basketball" href="#">Team Tools</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Timer(Stage4)</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" target="_blank" href="https://omoroi-life.com/jp/sports/basketball#new-properties">何でやねん!?! バスケ</a>
+                    </li>
+                    
+                </ul>
+                
             </div>
         </div>
+    </nav>
+
+
+    <div class="container text-center">
+
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <h2>How many teams are playing basketball ?? </h2>
+                    <input type="number" min="1" max="4" value="3" class="form-control" id="input_team" name="input_team" placeholder="Enter your number max 4">
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <h3>(Stage 1)</h3>
+                <button id="saveBtn" name="saveBtn_Stage1" type="submit" class="btn btn-success">Display all combination possibilities </button>
+            </div>
+            <div class="col-4">
+                <h3>(Stage 2)</h3>
+                <button id="saveBtn" name="saveBtn_Stage2" type="submit" class="btn btn-danger">Display all combination possibilities with conditions</button>
+            </div>
+            <div class="col-4">
+                <h3>(Stage 3)</h3>
+                <button id="saveBtn" name="saveBtn_Stage3" type="submit" class="btn btn-danger">Display all with Conditions and Time</button>
+            </div>
+        </div>
+
+        <div class="col">
+            <div id="div_display" class="mb-3">
+                <label for="Exampledisplay" class="form-label"></label>
+                <!--  <span class="fa-solid fa-people-group"></span>-->
+
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
 
 <script type="text/javascript">
 
-
     $(document).ready(function () {
-
-        $("#saveBtn").click(function () {
-            coreTeamLogic();
-        });
-
+      // When page load ...
     });
 
+    $("#saveBtn").click(function () {
 
-    function coreTeamLogic() {
+        // Data
+        let input_team_value = $('#input_team').val();
 
-        alert("Handler for .click() called.");
+        // Guard
+        if (input_team_value > 5) {
+            alert("Exceeds input limit!! max team is 5");
+        }
+
+        coreTeamLogic(input_team_value);
+    });
+
+    function coreTeamLogic(input_team_value) {
+
+        // clear step
+        $('#div_display').empty();
+
+        for (var i = 0; i < input_team_value; i++) {
+
+            let firstTeamNum = i + 1;
+            for (var t = 0; t < input_team_value ; t++) {
+          
+                let secondTeamNum = t + 1;
+
+                // Mistake-proofing
+                if (secondTeamNum == firstTeamNum ) {
+                    continue;
+                }
+
+                let firstTeamColorSting = colorDefine(firstTeamNum);
+                let secondTeamColorSting = colorDefine(secondTeamNum);
+             
+       
+                let newline_HtmlTag = "<br/ > ";
+                let btn_TeamAHtmlTag = "<button class=' btn " + firstTeamColorSting +"'><b>Team:</b> " + firstTeamNum + "</button>";
+                let span__HtmlTag = "<span>  VS  </span>";
+                let btn_TeamBHtmlTag = "<button class=' btn " + secondTeamColorSting +"'><b>Team:</b> " + secondTeamNum + "</button>";
+
+                $('#div_display').append(newline_HtmlTag + btn_TeamAHtmlTag + span__HtmlTag + btn_TeamBHtmlTag)
+            }
+        }
     }
 
 
+    function colorDefine(input_team_value) {
+
+                // Define Color
+                // team 1 = btn-default
+                // team 2 = btn-primary
+                // team 3 = btn-success
+                // team 4 = btn-info
+                // team 5 = btn-warning
+
+        switch (input_team_value) {
+
+            case 1:
+                return "btn-outline-warning";
+            case 2:
+                return "btn-outline-primary";
+            case 3:
+                return "btn-outline-success";
+            case 4:
+                return "btn-outline-info";
+            case 5:
+                return "btn-default";
+        }
+    }
+
+    // Backup Icon Class
+    // fa-solid fa-people-line btn
+    // fa-solid fa-people-group btn
+    
 </script>
